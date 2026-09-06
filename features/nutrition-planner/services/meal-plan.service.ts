@@ -143,8 +143,10 @@ export function generateWeeklyMealPlan(
       if (freeMeal && mealType === "Cena") return flexibleMeal(dayIndex);
 
       const options = byType(mealType);
+      // Rotación semanal: con el catálogo ampliado evitamos repetir una receta
+      // hasta agotar las opciones disponibles para ese tipo de comida.
       const offset = trainingDay && mealType === "Comida" ? 0 : 1;
-      const recipe = options[(dayIndex + mealIndex + offset) % options.length];
+      const recipe = options[(dayIndex + offset) % options.length];
       return scaleRecipe(recipe, 1, `${dayIndex}-${mealIndex}-${recipe.name}`);
     });
 

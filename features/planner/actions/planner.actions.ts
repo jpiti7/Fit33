@@ -5,7 +5,6 @@ import { buildWeeklyPlan } from "@/features/planner/services/planner.service";
 import { getLatestRecoveryAction } from "@/features/recovery";
 import { getPreferencesAction } from "@/features/settings";
 import { createClient } from "@/lib/supabase/server";
-import type { WeeklyPlan } from "@/features/planner/types";
 
 export async function getWeeklyPlanAction() {
   const [report, preferences, recovery] = await Promise.all([

@@ -27,6 +27,7 @@ type ExerciseCardProps = {
   name: string;
   muscleGroup: string;
   targetReps: string;
+  suggestedWeight?: number | null;
   onSetCompleted?: () => void;
 };
 
@@ -38,6 +39,7 @@ export function ExerciseCard({
   name,
   muscleGroup,
   targetReps,
+  suggestedWeight,
   onSetCompleted,
 }: ExerciseCardProps) {
   const { fields, append, remove } = useFieldArray({
@@ -64,6 +66,11 @@ export function ExerciseCard({
             <CardDescription className="mt-1">
               {muscleGroup} · objetivo {targetReps} repeticiones
             </CardDescription>
+            {suggestedWeight != null && suggestedWeight > 0 && (
+              <p className="mt-2 text-xs font-semibold text-emerald-300">
+                Carga sugerida: {suggestedWeight.toLocaleString("es-ES")} kg
+              </p>
+            )}
           </div>
 
           <span className="w-fit rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-400">

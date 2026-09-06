@@ -99,6 +99,14 @@ export default function TrainingsPage() {
           ))}
         </section>
       </div>
+      <div className="mx-auto mt-6 max-w-4xl px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/entrenos/records"
+          className="inline-flex items-center rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:border-emerald-400 hover:text-emerald-400"
+        >
+          🏆 Ver récords personales
+        </Link>
+      </div>
     </main>
   );
 }

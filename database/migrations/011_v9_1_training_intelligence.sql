@@ -1,0 +1,4 @@
+-- Fit33 v9.1
+-- No new columns are required: RIR, load, reps and completed status already exist.
+-- This migration documents the v9.1 training intelligence layer, which derives
+-- progression and personal records from existing workout history.

@@ -405,6 +405,7 @@ export function WorkoutForm({
             name={exercise.name}
             muscleGroup={exercise.muscleGroup}
             targetReps={exercise.targetReps}
+            suggestedWeight={suggestedWeights[exercise.name]}
             onSetCompleted={() => session.startRest()}
           />
         ))}
