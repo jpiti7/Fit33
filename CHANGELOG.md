@@ -1,3 +1,10 @@
+## v8.1.0 — Biblioteca, Perfil y Automatización
+
+- Biblioteca ampliada de ejercicios por grupos musculares.
+- Editor de perfil funcional con persistencia en Supabase.
+- El perfil muestra preferencias reales guardadas.
+- El Coach Adaptativo puede aplicar y guardar planes confirmados.
+
 ## [8.0.0] - Coach Adaptativo 2.0
 
 - Añadido centro de decisiones del Coach Autónomo.

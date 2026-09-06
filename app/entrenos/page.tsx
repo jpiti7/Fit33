@@ -54,6 +54,12 @@ export default function TrainingsPage() {
             Ver historial
           </Link>
           <Link
+            href="/biblioteca-ejercicios"
+            className="rounded-xl border border-slate-700 px-5 py-3 text-center font-semibold text-slate-300 transition hover:border-emerald-400 hover:text-emerald-400"
+          >
+            Biblioteca de ejercicios
+          </Link>
+          <Link
             href="/analiticas"
             className="rounded-xl border border-emerald-400/50 bg-emerald-400/10 px-5 py-3 text-center font-semibold text-emerald-400 transition hover:bg-emerald-400 hover:text-slate-950"
           >

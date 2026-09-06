@@ -1,17 +1,28 @@
 import Link from "next/link";
 
 import { logout } from "@/app/login/actions";
+import { getPreferencesAction } from "@/features/settings/actions/settings.actions";
 
-const profileData = [
-  { label: "Nombre", value: "Jesús" },
-  { label: "Edad", value: "28 años" },
-  { label: "Altura", value: "170 cm" },
-  { label: "Peso inicial", value: "82 kg" },
-  { label: "Objetivo", value: "75 kg" },
-  { label: "Entrenamientos", value: "4 días por semana" },
-];
+export default async function ProfilePage() {
+  const preferences = await getPreferencesAction();
+  const profileData = [
+    { label: "Nombre", value: preferences.displayName },
+    { label: "Edad", value: "28 años" },
+    { label: "Altura", value: "170 cm" },
+    {
+      label: "Peso objetivo",
+      value: preferences.targetWeight
+        ? `${preferences.targetWeight} kg`
+        : "Sin definir",
+    },
+    { label: "Calorías", value: `${preferences.targetCalories} kcal` },
+    { label: "Proteína", value: `${preferences.targetProtein} g` },
+    {
+      label: "Entrenamientos",
+      value: `${preferences.weeklyWorkouts} días por semana`,
+    },
+  ];
 
-export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
@@ -44,12 +55,12 @@ export default function ProfilePage() {
           ))}
         </section>
 
-        <button
-          type="button"
-          className="mt-6 w-full rounded-xl border border-slate-700 px-5 py-3 font-semibold text-slate-300 transition hover:border-emerald-400 hover:text-emerald-400"
+        <Link
+          href="/perfil/editar"
+          className="mt-6 block w-full rounded-xl border border-slate-700 px-5 py-3 text-center font-semibold text-slate-300 transition hover:border-emerald-400 hover:text-emerald-400"
         >
           Editar perfil
-        </button>
+        </Link>
 
         <Link
           href="/recuperacion"

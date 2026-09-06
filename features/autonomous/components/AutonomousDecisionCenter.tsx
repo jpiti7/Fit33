@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { AutonomousSummary } from "@/features/autonomous/types";
 import { buildDecisionPreviews } from "@/features/autonomous/services/decision.service";
+import { applyAutonomousAction } from "@/features/autonomous/actions";
 
 export function AutonomousDecisionCenter({
   data,
@@ -19,16 +20,27 @@ export function AutonomousDecisionCenter({
   const previews = useMemo(() => buildDecisionPreviews(data), [data]);
   const [selected, setSelected] = useState(0);
   const [confirmed, setConfirmed] = useState<string[]>([]);
+  const [message, setMessage] = useState("");
+  const [pending, setPending] = useState(false);
   const preview = previews[selected];
 
   if (!preview) {
     return null;
   }
 
-  function confirm() {
+  async function confirm() {
+    setPending(true);
+    setMessage("");
+    const result = await applyAutonomousAction(preview.action);
+    setPending(false);
+    if (!result.success) {
+      setMessage(result.message);
+      return;
+    }
     setConfirmed((current) =>
       current.includes(preview.action) ? current : [...current, preview.action],
     );
+    setMessage(result.message);
   }
 
   const done = confirmed.includes(preview.action);
@@ -95,7 +107,7 @@ export function AutonomousDecisionCenter({
           <button
             type="button"
             onClick={confirm}
-            disabled={done}
+            disabled={done || pending}
             className="inline-flex min-h-11 items-center gap-2 rounded-2xl bg-cyan-300 px-4 font-bold text-slate-950 disabled:opacity-70"
           >
             {done ? (
@@ -105,6 +117,11 @@ export function AutonomousDecisionCenter({
             )}
             {done ? "Confirmado" : "Confirmar propuesta"}
           </button>
+          {message && (
+            <p aria-live="polite" className="basis-full text-sm text-slate-400">
+              {message}
+            </p>
+          )}
           <Link
             href={
               preview.action === "reorganize_training"
